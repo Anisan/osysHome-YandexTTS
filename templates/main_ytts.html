@@ -1,0 +1,23 @@
+{% extends "layouts/module_admin.html" %}
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="YandexTTS">YandexTTS</a></li>
+{% endblock %}
+{% block module %}
+<form  method="POST">
+        <!-- Поля формы -->
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+            {{ form.access_key.label(class="form-label") }}
+            {{ form.access_key(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.speaker.label(class="form-label") }}
+            {{ form.speaker(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.emotion.label(class="form-label") }}
+            {{ form.emotion(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
