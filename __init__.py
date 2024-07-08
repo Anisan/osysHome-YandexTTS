@@ -36,7 +36,7 @@ class YandexTTS(BasePlugin):
         }
         return self.render('main_ytts.html', content)
     
-    def say(self, message, level=0, destination=None):
+    def say(self, message, level=0, image=None, destination=None):
         
         hash = hashlib.md5(message.encode('utf-8')).hexdigest()
 
