@@ -18,7 +18,7 @@ class YandexTTS(BasePlugin):
 
     def initialization(self):
         pass
-    
+
     def admin(self, request):
         settings = SettingsForm()
         if request.method == 'GET':
@@ -35,17 +35,17 @@ class YandexTTS(BasePlugin):
             "form": settings,
         }
         return self.render('main_ytts.html', content)
-    
-    def say(self, message, level=0, image=None, destination=None):
-        
+
+    def say(self, message, level=0, args=None):
+
         hash = hashlib.md5(message.encode('utf-8')).hexdigest()
 
         base_url = 'https://tts.voicetech.yandex.net/generate?'
 
         # файл с кешированным аудио
-        file_name = hash+'_ytts.mp3'
+        file_name = hash + '_ytts.mp3'
 
-        cached_file_name = findInCache(file_name,"TTS",True)
+        cached_file_name = findInCache(file_name, "TTS", True)
         # Проверяем, существует ли файл с кешированным аудио и не является ли он пустым
         if not cached_file_name or os.path.getsize(cached_file_name) == 0:
             lang = "ru_RU"  # TODO landuage
@@ -53,8 +53,8 @@ class YandexTTS(BasePlugin):
                 'format': 'mp3',
                 'lang': lang,
                 'speaker': self.config.get("speaker",'tatyana_abramova'),
-                'emotion': self.config.get("emotion",'good'), 
-                'key': self.config.get("access_key",''), 
+                'emotion': self.config.get("emotion",'good'),
+                'key': self.config.get("access_key",''),
                 'text': message  # Замените message на реальное значение
             }
             try:
@@ -74,8 +74,3 @@ class YandexTTS(BasePlugin):
         cached_file_name = findInCache(file_name,"TTS",True)
         if cached_file_name and os.path.getsize(cached_file_name):
             playSound(cached_file_name, level)
-            
-                
-
-        
-        
