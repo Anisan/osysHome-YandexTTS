@@ -73,4 +73,4 @@ class YandexTTS(BasePlugin):
         # Если файл существует и не является пустым, обрабатываем его
         cached_file_name = findInCache(file_name,"TTS",True)
         if cached_file_name and os.path.getsize(cached_file_name):
-            playSound(cached_file_name, level)
+            playSound(cached_file_name, level, args)
