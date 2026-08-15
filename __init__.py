@@ -1,5 +1,6 @@
 import os
 import requests
+from app.configuration import Config
 import hashlib
 from app.core.main.BasePlugin import BasePlugin
 from plugins.YandexTTS.forms.SettingForms import SettingsForm
@@ -58,7 +59,7 @@ class YandexTTS(BasePlugin):
                 'text': message  # Замените message на реальное значение
             }
             try:
-                response = requests.get(base_url, params=qs)
+                response = requests.get(base_url, params=qs, timeout=Config.HTTP_REQUEST_TIMEOUT)
 
                 # Проверяем успешность запроса
                 if response.status_code == 200:
